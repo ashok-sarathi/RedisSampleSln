@@ -39,6 +39,12 @@ builder.Services.AddSwaggerGen(swagger =>
 });
 builder.Services.AddDbContextSettings();
 
+builder.Services.AddStackExchangeRedisCache(x =>
+{
+    x.Configuration = builder.Configuration.GetSection("RedisCacheOptions:Configuration").Value;
+    x.InstanceName = builder.Configuration.GetSection("RedisCacheOptions:InstanceName").Value;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
